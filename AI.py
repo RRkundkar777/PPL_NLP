@@ -88,6 +88,7 @@ def mailto(content,mail):
 
 
 if __name__ == "__main__":
+    print('S.O.P.H.I.E\n')
     login()
     state = 1
 
@@ -125,13 +126,15 @@ if __name__ == "__main__":
         
         # Playing Music
         elif 'play music' in query:
+            speak('Processing')
             music_dir = 'T:\\Music\\'
             songs = os.listdir(music_dir)
             os.startfile(os.path.join(music_dir,songs[92]))
         
         # Speak Time
         elif 'time' in query:
-            strTime = datetime.datetime.now().strtime("%H:%M:%S")
+            strTime = datetime.datetime.now()
+            speak("The time is ")
             speak(strTime)   
 
         # Opening Basic Executables
@@ -145,7 +148,11 @@ if __name__ == "__main__":
         
         elif 'word' in query:
             word_path = 'C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE'
-            os.startfile(word_path)                
+            os.startfile(word_path)
+
+        elif 'calculator' in query:
+            speak('Opening Piezon 1.0.0')
+            os.startfile('.\piezon.exe')                
 
         # Opening Code Editors
         elif 'editor' in query:
@@ -214,13 +221,14 @@ if __name__ == "__main__":
             speak('Exitting. Please Wait')
             state = 0
 
-        
+        # Taking a Screenshot
         elif 'shot' in query:
             shot = pyautogui.screenshot()
             number_of_shots += 1
             shot.save('Screenshot' + str(number_of_shots) + '.png')
             speak('Screenshot saved')
         
+        # Automating whatsapp
         elif 'message' in query:
             hour = int(datetime.datetime.now().hour)
             minute = int(datetime.datetime.now().minute)
@@ -238,8 +246,9 @@ if __name__ == "__main__":
                 pywhatkit.sendwhatmsg(contacts[0], message, hour,minute+2)
             elif 'sister' in receiver:
                 pywhatkit.sendwhatmsg(contacts[1], message, hour,minute+2)
+            speak('Message Sent')
 
-            
+        # Shutting Down the System  
         elif 'shutdown' in query:
             speak('You are about to shutdown the system')
             speak('PLease be certain')
@@ -255,6 +264,7 @@ if __name__ == "__main__":
                     shutdelay += -1
                 os.system("shutdown /s /t 1")
         
+        # Rebooting the System
         elif 'reboot' in query:
             speak('You are about to reboot the system')
             speak('PLease be certain')
